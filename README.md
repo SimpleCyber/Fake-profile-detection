@@ -5,12 +5,13 @@
 
 ## Description
 
-Imposter is a system that detects fake social media profiles using machine learning. It retrieves and analyzes data from platforms like Instagram, LinkedIn, and Facebook to predict profile authenticity.
+Imposter : a system that detects fake social media profiles from maijor social media platforms. It retrieves and analyzes data from platforms like Instagram, LinkedIn, and Facebook to predict profile authenticity.
 
 **Participated in SIH 2024: Won First Prize!**
 
 <div align="center">
-  <img src="https://media.licdn.com/dms/image/v2/D4D22AQHfP1FOXy7Wqw/feedshare-shrink_1280/B4DZPTTw7GGgAk-/0/1734417016224?e=1738195200&v=beta&t=2mND3nZBTcWhur2ZHPpTTvOBLQna0c4KO7hkPOu2MkM" alt="Tech Simp - SIH Winner" width="600" />
+  <img src="https://media.licdn.com/dms/image/v2/D4D22AQHVO2sKSrz_6A/feedshare-shrink_2048_1536/B4DZPTTxGrGoAo-/0/1734417108066?e=1738195200&v=beta&t=kvn__lr6EPa3Ct5TkVwfJdD8fM2GqHMr2I7lJx1Z6q4" alt="Tech Simp Image 1" width="400" style="margin-right: 10px;" />
+  <img src="https://media.licdn.com/dms/image/v2/D4D22AQEew81maLhvMw/feedshare-shrink_2048_1536/B4DZPTTxJuGUAs-/0/1734417088047?e=1738195200&v=beta&t=pR9zSt6EBqZlPSFS0EXqPMzYUDr0AnXQ32qMlLYPm_M" alt="Tech Simp Image 2" width="400" />
 </div>
 
 ## Features
@@ -34,11 +35,8 @@ Imposter is a system that detects fake social media profiles using machine learn
 ## Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript
-
-- **Backend:** Flask, Django
-
-- **Database:** SQLite/PostgreSQL
-
+- **Backend:** Flask
+- **Database:** Firebase
 - **Machine Learning:** Scikit-learn
 
 ---
