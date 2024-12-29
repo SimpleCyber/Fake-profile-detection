@@ -5,7 +5,7 @@
 
 ## Description
 
-Imposter : a system that detects fake social media profiles from maijor social media platforms. It retrieves and analyzes data from platforms like Instagram, LinkedIn, and Facebook to predict profile authenticity.
+Imposter : A system that detects fake social media profiles from maijor social media platforms.
 
 **Participated in SIH 2024: Won First Prize!**
 
