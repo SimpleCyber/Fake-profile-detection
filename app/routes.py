@@ -5,7 +5,6 @@ import json
 import traceback
 import os
 import joblib
-from django.conf import settings
 
 
 @app.route('/')
