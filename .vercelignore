@@ -1,0 +1,22 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore model files
+*.pkl
+*.h5
+
+# Ignore temporary files and logs
+*.log
+*.tmp
+
+# Ignore the test directory
+test/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+
+# Ignore node_modules if using a Node.js app with Vercel
+node_modules/

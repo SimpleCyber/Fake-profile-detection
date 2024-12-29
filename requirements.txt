@@ -1,8 +1,5 @@
 Flask
 Flask-Cors
 requests
-numpy
-tensorflow
 joblib
 openai
-django
