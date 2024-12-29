@@ -16,6 +16,8 @@ import requests
 # Follow to see their photos and videos.
 # """
 
+MODEL = "4.o"
+
 # ------------------------------------------------------------
 # Providing the system prompt
 # ------------------------------------------------------------
