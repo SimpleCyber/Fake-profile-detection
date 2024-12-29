@@ -10,9 +10,9 @@ Imposter : a system that detects fake social media profiles from maijor social m
 **Participated in SIH 2024: Won First Prize!**
 
 <div align="center">
-  <img src="https://media.licdn.com/dms/image/v2/D4D22AQHVO2sKSrz_6A/feedshare-shrink_2048_1536/B4DZPTTxGrGoAo-/0/1734417108066?e=1738195200&v=beta&t=kvn__lr6EPa3Ct5TkVwfJdD8fM2GqHMr2I7lJx1Z6q4" alt="Tech Simp Image 1" height="300 width="400" style="margin-right: 10px;" />
+  <img src="https://media.licdn.com/dms/image/v2/D4D22AQHVO2sKSrz_6A/feedshare-shrink_2048_1536/B4DZPTTxGrGoAo-/0/1734417108066?e=1738195200&v=beta&t=kvn__lr6EPa3Ct5TkVwfJdD8fM2GqHMr2I7lJx1Z6q4" alt="Tech Simp Image 1" height="270" width="400" />
   
-  <img src="https://media.licdn.com/dms/image/v2/D4D22AQEew81maLhvMw/feedshare-shrink_2048_1536/B4DZPTTxJuGUAs-/0/1734417088047?e=1738195200&v=beta&t=pR9zSt6EBqZlPSFS0EXqPMzYUDr0AnXQ32qMlLYPm_M" alt="Tech Simp Image 2" height="300" width="400" />
+  <img src="https://media.licdn.com/dms/image/v2/D4D22AQEew81maLhvMw/feedshare-shrink_2048_1536/B4DZPTTxJuGUAs-/0/1734417088047?e=1738195200&v=beta&t=pR9zSt6EBqZlPSFS0EXqPMzYUDr0AnXQ32qMlLYPm_M" alt="Tech Simp Image 2" height="270" width="400" />
 </div>
 
 ## Features
