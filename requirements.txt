@@ -4,3 +4,4 @@ requests
 joblib
 openai
 gunicorn
+scikit-learn
