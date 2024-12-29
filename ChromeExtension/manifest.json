@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Anchor Tag Finder",
+  "version": "2.0",
+  "description": "Imposter : Hello",
+  "permissions": ["scripting", "activeTab" , "storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
