@@ -12,137 +12,73 @@
 
   <link rel="shortcut icon" href="{{ url_for('static', filename='images/appLogo.png')}}" type="image/x-icon" />
 </head>
-<style>
-  .container{
-    display: flex;
-    gap: 1rem;
-  }
-  .header {
-      
-      margin-bottom: 2rem;
-    }
-
-    .header h1 {
-      font-size: 2rem;
-      color: #333;
-    }
-
-    /* Image and Button Container */
-    .users {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      margin-top: 2rem;
-      gap: 1rem;
-    }
-
-    .user-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .user-section img {
-      max-width: 150px;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-
-    .users a {
-      text-decoration: none;
-    }
-    .logo-green {
-    color: green;
-}
-
-.logo-blue {
-    color: blue;
-}
-
-.inner-container {
-    background-color: #7FC7D9;
-    width: 30%;
-    height: 80vh;
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Arrange items in a column */
-    justify-content: center; /* Center items vertically */
-    align-items: center; /* Center items horizontally */
-    margin: auto;
-    margin-top: 4%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    text-align: center;
-}
-
-</style>
+ 
 
 <body>
-  <div class="container">
-    <div class="inner-container">
-      <div class="header">
-        <h1>Welcome to<span class="logo-blue"> Imposter</span></h1>
-      </div>
-  
-      <!-- Users Section -->
-      <div class="users">
-        <!-- Tenant Section -->
-        <div class="user-section">
-          <img src="{{ url_for('static', filename='images/Single.png')}}" alt="Tenant Image">
-          <a href="#">
-            <button id="bb">Single data</button>
-          </a>
+
+  <div class="main">
+    <div class="container">
+      <div class="inner-container">
+        <div class="header">
+          <h1 style="color:white">Welcome to<span class="logo-blue"> Imposter</span></h1>
         </div>
-  
-        <!-- Admin Section -->
-        <div class="user-section">
-          <img src="{{ url_for('static', filename='images/multiple.png')}}" alt="Owner Image">
-          <a href="#">
-            <button id="cc">multiple data </button>
-          </a>
+
+        <!-- Users Section -->
+        <div class="users">
+          <!-- Tenant Section -->
+          <div class="user-section">
+            <img src="{{ url_for('static', filename='images/personnel.png')}}" alt="Tenant Image">
+            <a href="#">
+              <button id="bb" style="width:10rem">Personnel</button>
+            </a>
+          </div>
+
+          <!-- Admin Section -->
+          <div class="user-section">
+            <img src="{{ url_for('static', filename='images/reports.png')}}" alt="Owner Image">
+            <a href="#">
+              <button id="cc" style="width:10rem"> <a style="text-decoration: none; color: aliceblue;" href="/cyber">
+                  Central Agency Dashboard</a></button>
+            </a>
+          </div>
         </div>
       </div>
-  <!-- 
-      <br>
-      <a href="try.html">
-        <button>Try :)</button>
-      </a> -->
-    </div>
-  
-
-  <div id="loginBox">
-
-    <h2>Login</h2>
-
-    <input type="text" id="userEmail" placeholder="Enter a Registered Email ID">
-
-    <input type="password" id="userPassword" placeholder="Enter Password">
-
-    <p id="fPassword">Forgot Password? <span id="resetP">Reset Password</span></p>
-
-    <button id="emailLogin" style="width: 50%;">Login</button>
-
-    <p class="colorWb">Or</p>
-
-    <div id="parentG">
-      <div id="googleLogin">
-
-        <img id="googleImg" src="{{ url_for('static', filename='images/google.png')}}" alt="">
-
-        <p id="googleSP">Sign in with Google</p>
-
-
-
-      </div>
-
-      
     </div>
 
 
-    <p id="fPassword">Dont have an account? <span id="resetP2">Register</span></p>
+    <div id="loginBox">
 
+      <h2>Login</h2>
+
+      <input type="text" id="userEmail" placeholder="Enter a Registered Email ID">
+
+      <input type="password" id="userPassword" placeholder="Enter Password">
+
+      <p id="fPassword">Forgot Password? <span id="resetP">Reset Password</span></p>
+
+      <button id="emailLogin" style="width: 50%;">Login</button>
+
+      <p class="colorWb">Or</p>
+
+      <div id="parentG">
+        <div id="googleLogin">
+
+          <img id="googleImg" src="{{ url_for('static', filename='images/google.png')}}" alt="">
+
+          <p id="googleSP">Sign in with Google</p>
+
+
+
+        </div>
+
+
+      </div>
+
+
+      <p id="fPassword">Dont have an account? <span id="resetP2">Register</span></p>
+
+    </div>
   </div>
-</div>
 
   <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>

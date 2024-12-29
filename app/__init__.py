@@ -12,5 +12,4 @@ from app.model import openai
 from app.tests.FraudDetection import twitter
 from app.tests.FraudDetection import facebook
 from app.tests.FraudDetection import wholeinsta
-from app.model import imageclass
 from app.tests.FraudDetection import linkedin
