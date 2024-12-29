@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cyber.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Imposter</h2>
+      <ul>
+        <li><i class="fas fa-home"></i><a href="#" id="cyber"> Dashboard</a></li>
+        <li><i class="fas fa-flag"></i> <a href="#" id="cyberreport">Reported Accounts</a></li>
+        <li><i class="fas fa-history"></i> <a href="#" id="cyberhistory">History</a></li>
+      </ul>
+    </div>
+    <div class="toggle-button" onclick="toggleSidebar()" style="display: none;">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Main Content -->
+    <main class="dashboard" id="history-main" >
+      <header class="header">
+        <input type="text" placeholder="Search for Accounts" class="search-bar">
+        <button class="filter-button">
+          <span class="filter-icon">⚙</span> Filter
+        </button>
+        <div class="header-icons">
+          <div class="theme-switch">
+            <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+            <label for="theme-toggle" class="theme-toggle-label">
+              <span class="toggle-circle"></span>
+            </label>
+          </div>
+          <i class="fas fa-bell"></i>
+          <i class="fas fa-cog"></i>
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </header>
+
+
+      <div class="table-container">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>User-id</th>
+              <th>Account Link</th>
+              <th>Status</th>
+              <th>Platform</th>
+            </tr>
+          </thead>
+          <tbody id="history-data">
+            <!-- Rows will be dynamically added -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="{{ url_for('static', filename='js/cyberhistory.js')}}" type="image/x-icon"></script>
+</body>
+</html>

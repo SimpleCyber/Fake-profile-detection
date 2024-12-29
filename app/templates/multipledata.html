@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram User Search</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+        :root {
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --material: #1abc9c;
+            --text: #ecf0f1;
+            --darkText: black;
+            --primary-bg1: #f7fefe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-form input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-form button {
+            padding: 10px 20px;
+            background-color: var(--material);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-form button:hover {
+            background-color: #17a589;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: var(--primary-bg1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        thead {
+            background-color: var(--material);
+            color: white;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .profile-pic {
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--material);
+        }
+
+        .no-results {
+            text-align: center;
+            color: var(--dark);
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Instagram User Search</h1>
+
+    <form method="POST" class="search-form">
+        <input type="text" name="name" placeholder="Enter name to search" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error_message %}
+    <div class="error">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
+    {% if results %}
+    <table>
+        <thead>
+            <tr>
+                <th>SR. No</th>
+                <th>Profile Picture</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>User ID</th>
+                <th>Private</th>
+                <th>Verified</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in results %}
+            <tr>
+                <td>{{ user.index }}</td>
+                <td>
+                    <img src="{{ user.profile_pic_url }}" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+                </td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ 'Yes' if user.is_private else 'No' }}</td>
+                <td>{{ 'Yes' if user.is_verified else 'No' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="no-results">No users found. Please try again.</div>
+    {% endif %}
+
+
+
+
+    <script type="module" src="{{ url_for('static', filename='js/wholeinsta.js')}}" type="image/x-icon"></script>
+</body>
+</html>

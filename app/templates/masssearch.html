@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+
+
+
+{% block css %}
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --dark:#2c3e50;
+            --light:#f8f9fa;
+            --material: #1abc9c;
+            --text:#ecf0f1;
+            --darkText: black;
+            --primary-bg1:#f7fefe;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-color: var(--light);
+            user-select: none;
+            color: var(--material);
+            font-family: 'Open Sans';
+            overflow: auto;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        #appT {
+            font-weight: 600;
+            font-size: 28px;
+            padding-left: 3%;
+        }
+
+        #appL1 {
+            width: 10%;
+            padding-top: 0.46%;
+        }
+
+        #appLogo {
+            display: flex;
+            align-items: center;
+            margin-left: 2%;
+        }
+
+
+
+
+        .dropbtn {
+            background-color: inherit;
+            color: var(--material);
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--dark);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: var(--text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--material);
+            color: var(--lightText);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        #signupButton {
+            width: 10%;
+            height: 6vh;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            color: var(--darkText);
+            background-color: var(--material);
+            font-size: 17px;
+            margin-left: auto;
+            margin-right: 2%;
+            cursor: pointer;
+        }
+
+        .aM, #a1 {
+            font-size: 20px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-family: 'Open Sans';
+            margin-left: 9%;
+            white-space: nowrap;
+        }
+
+        .aM:hover, #a1:hover {
+            font-weight: 600;
+        }
+
+        i {
+            padding-left: 5%;
+        }
+
+        #modeColor {
+            font-size: 28px;
+            margin-left: 2%;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-form input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-form button, #reportAll {
+            padding: 10px 20px;
+            background-color: var(--material);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 1rem;
+        }
+        #reportAll{
+            background-color: rgb(241, 64, 64);
+        }
+
+        .search-form button:hover {
+            background-color: #17a589;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: var(--primary-bg1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #2f2f2f;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        thead {
+            background-color: var(--material);
+            color: white;
+        }
+
+        .profile-pic {
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--material);
+        }
+
+        .no-results {
+            text-align: center;
+            color: var(--dark);
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: left;
+            margin-top: 1rem;
+            margin-left: 1rem;
+        }
+
+        .select-all-btn {
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+.searchall {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 40rem;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #4a90e2;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    height: 3rem;
+    margin-top: .5rem;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+#reportAll {
+    background-color: #e65130;
+}
+
+#reportAll:hover {
+    background-color: #5a6268;
+}
+
+.search-form button{
+    margin-top: 2rem;
+}
+
+.searchall{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+    </style>
+
+{% endblock css %}
+
+
+{% block body %}
+
+
+<div class="searchall">
+<form method="POST" class="search-form">
+    <input type="text" name="name" placeholder="Enter name to search" required>
+    <button type="submit">Search</button>
+   
+</form>
+<button id="reportAll" style="margin-top: 20px;">Report</button>
+</div>
+
+{% if error_message %}
+<div class="error">
+    {{ error_message }}
+</div>
+{% endif %}
+
+{% if results %}
+<table>
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="select-all"> Select All</th>
+            <th>SR. No</th>
+            <th>Profile Picture</th>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>User ID</th>
+            <th>Private</th>
+            <th>Verified</th>
+            <th>Bio</th>
+            <th>Followers</th>
+            <th>Following</th>
+            <th>Fraud Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in results %}
+        <tr>
+            <td><input type="checkbox" class="user-checkbox" data-user-id="{{ user.id }}"></td>
+            <td>{{ user.index }}</td>
+            <td>
+            <img src="{{ user.profile_pic_url }}" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ 'Yes' if user.is_private else 'No' }}</td>
+            <td>{{ 'Yes' if user.is_verified else 'No' }}</td>
+            <td>{{ user.Bio }}</td>
+            <td>{{ user.Followers }}</td>
+            <td>{{ user.Following }}</td>
+            <td>{{ user.predict }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="no-results">No users found. Please try again.</div>
+{% endif %}
+
+{% endblock body %}
+
+
+{% block script %}
+
+<script>
+    document.getElementById('select-all').addEventListener('change', function () {
+        const checkboxes = document.querySelectorAll('.user-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
+</script>
+
+{% endblock script %}

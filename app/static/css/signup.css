@@ -1,0 +1,172 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --dark: #7FC7D9;
+    --light: #DCF2F1;
+    --material: #0F1035;
+    --text: black;
+    --lightText: #ffffff ;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--light);
+    user-select: none;
+    color: var(--material);
+    font-family: 'Open Sans';
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#loginBox{
+    background-color: var(--dark);
+    width: 30%;
+    height: 85vh;
+    display: block;
+    margin: auto;
+    margin-top: 4%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+#loginBox h2{
+    display: block;
+    margin: auto;
+    width: 100%;
+    background-color: var(--material);
+    color: var(--lightText);
+    padding: 3% 0%;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+}
+
+input{
+    width: 80%;
+    display: block;
+    margin: auto;
+    height: 6.6vh;
+    text-align: center;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    margin-top: 8%;
+    font-size: 17px;
+    font-family: 'Open Sans';
+    background-color: var(--light);
+    color: var(--text);
+}
+
+input:focus{
+    border: solid 2px var(--material);
+}
+
+select{
+    width: 80%;
+    display: block;
+    margin: auto;
+    height: 6.6vh;
+    text-align: center;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    margin-top: 8%;
+    font-size: 17px;
+    font-family: 'Open Sans';
+    background-color: var(--light);
+    color: var(--text);
+    cursor: pointer;
+}
+
+select:focus{
+    border: solid 2px var(--material);
+}
+
+#userEmail{
+    margin-top: 10%;
+}
+
+#fPassword{
+    color: var(--text);
+    text-align: center;
+    margin-top: 6%;
+}
+
+#fPassword span{
+    color: var(--material);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button{
+    width: 50%;
+    height: 6vh;
+    background-color: var(--material);
+    border: none;
+    outline: none;
+    color: var(--lightText);
+    font-size: 19px;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    margin-top: 9%;
+    cursor: pointer;
+}
+
+.colorWb{
+
+    color: var(--text);
+    text-align: center;
+    margin-top: 5%;
+    font-size: 20px;
+}
+
+#googleLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--lightText);
+    width: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+
+}
+
+
+#resetP2{
+    color: var(--material);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+#googleImg{
+    padding: 3% 0%;
+    width:8%;
+  
+}
+
+#googleSP{
+    font-weight: 600;
+    margin-left: 4%;
+    font-size: 17px;
+
+}
+
+#parentG{
+    display: block;
+    margin: auto;
+    width: 70%;
+    margin-top: 6%;
+   
+}

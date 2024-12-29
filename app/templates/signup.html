@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imposter</title>
+
+  <script src="https://kit.fontawesome.com/6cc1a5eb9c.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}" />
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/appLogo.png')}}" type="image/x-icon" />
+</head>
+
+<body>
+
+  <div id="loginBox">
+
+    <h2>Register</h2>
+
+    <input type="text" id="userEmail" placeholder="Enter a Email ID">
+
+    <input type="password" id="userPassword" placeholder="Create Password">
+
+    <select name="accType" id="selAccType">
+        <option value="individual">ITBP Individual</option>
+        <option value="business">Cyber Agencies</option>
+    </select>
+
+    <button id="emailLogin">Signup</button>
+
+    <p class="colorWb">Or</p>
+
+    <div id="parentG">
+      <div id="googleLogin">
+
+        <img id="googleImg" src="{{ url_for('static', filename='images/google.png')}}" alt="">
+
+        <p id="googleSP">Signup with Google</p>
+
+
+      </div>
+    </div>
+
+
+    <p id="fPassword">Already have an account? <span id="resetP2">Login</span></p>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+
+  <script type="module" src="{{ url_for('static', filename='js/signup.js')}}" type="image/x-icon"></script>
+</body>
+
+</html>

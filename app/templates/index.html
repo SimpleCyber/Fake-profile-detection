@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imposter</title>
+
+  <script src="https://kit.fontawesome.com/6cc1a5eb9c.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/appLogo.png')}}" type="image/x-icon" />
+</head>
+
+<body>
+
+  <div id="topBar">
+
+    <div id="appLogo">
+      <button id="menuIcon"><i class="fa-solid fa-bars"></i></button>
+      <img id="appL1" src="{{ url_for('static', filename='images/appLogo.png')}}" alt="">
+      <h1 id="appT">Imposter</h1>
+    </div>
+
+    <div id="dropdownOtherMenus">
+      <div id="closeDropdown">Close &#10006;</div>
+      <a href="#">Home</a>
+      <a href="#">Mass Search</a>
+      <a href="#">Reports</a>
+  </div>
+
+    <div id="otherMenus">
+      <a class="aM" id="homeIcon" href="#">Home</a>
+      <a class="aM" href="/masssearch">Mass Search</a>
+      <a class="aM" id="Reports" href="#">Reports</a>
+      <i id="modeColor" class="fa-solid fa-moon"></i>
+
+      <div class="creditBalance">
+        <p class="creditB">30</p>
+
+        <img class="creditI" src="{{ url_for('static', filename='images/credits.png')}}" alt="">
+      </div>
+
+    </div>
+
+    <button id="signupButton">Get Started</button>
+  </div>
+
+  <div class="sideBar">
+    <img title="Help" class="sideBarIcon" src="{{ url_for('static', filename='images/chatbot.png')}}" alt="">
+    <img title="Credits" class="sideBarIcon" src="{{ url_for('static', filename='images/credits.png')}}" alt="">
+    <img title="Analytics" class="sideBarIcon" src="{{ url_for('static', filename='images/analytics.png')}}" alt="">
+    <img title="Profile" class="sideBarIcon" src="{{ url_for('static', filename='images/profile.png')}}" alt="">
+  </div>
+
+
+  <div class="flexFreeDetection">
+    <div class="freeDetection">
+
+      <p class="freeTest">1 Credit</p>
+
+      <div class="flexSocialMedia">
+
+        <div class="socialLogo " id="instagramLogo" data-platform="Instagram" value="detect_fraud_profile">
+          <img class="socialIcon" src="../static/images/instagram.png" alt="">
+        </div>
+
+        <div class="socialLogo" id="facebookLogo" data-platform="Facebook" value="detect_fb">
+          <img  class="socialIcon" src="../static/images/facebook.png" alt="">
+        </div>
+
+        <div class="socialLogo" id="twitterLogo" data-platform="Twitter" value="detect_x">
+          <img  class="socialIcon" src="../static/images/twitter.png" alt="">
+        </div>
+
+        <div class="socialLogo" id="linkedinLogo" data-platform="LinkedIn" value ="detect_linkdin">
+          <img  class="socialIcon" src="../static/images/linkedin.png" alt="">
+        </div>
+
+      </div>
+
+      <input id="socialUsername" type="text" placeholder="Enter a Username to Test">
+
+      <select name="selectTest" id="testType">
+        <option value="1">Fraud Profile Test </option>
+        <option value="2">Malicious Accounts</option>
+        <option value="3">Impersonation Accounts</option>
+        <option value="4">Spam or Scammer Accounts</option>
+        <option value="5"> Troll Accounts</option>
+        <option value="6"> Fake Recruitment or Training Accounts</option>
+        <option value="7">Hate Speech Detection Test</option>
+        <option value="8">Bot or Automation Test</option>
+      </select>
+      <div class="button">
+
+      <button id="btnStart">Start Test</button>
+      <button id="btnreport"  style="background-color: rgb(216, 70, 70);">Report</button>
+    </div>
+      
+
+    </div>
+    <div id="progressData" class="progressData"></div>
+  </div>
+
+
+
+  <script type="module" src="{{ url_for('static', filename='js/script.js')}}" type="image/x-icon"></script>
+  <script type="module" src="{{ url_for('static', filename='js/data.js')}}" type="image/x-icon"></script>
+
+</body>
+
+</html>

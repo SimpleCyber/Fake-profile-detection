@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imposter</title>
+
+  <script src="https://kit.fontawesome.com/6cc1a5eb9c.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/appLogo.png')}}" type="image/x-icon" />
+  {% block css %}
+
+
+  {% endblock css %}
+</head>
+
+<body>
+
+  <div id="topBar">
+
+    <div id="appLogo">
+      <button id="menuIcon"><i class="fa-solid fa-bars"></i></button>
+      <img id="appL1" src="{{ url_for('static', filename='images/appLogo.png')}}" alt="">
+      <h1 id="appT">Imposter</h1>
+    </div>
+
+    <div id="dropdownOtherMenus">
+      <div id="closeDropdown">Close &#10006;</div>
+      <a href="#">Home</a>
+      <a href="#">About us</a>
+      <a href="#">Reports</a>
+  </div>
+
+    <div id="otherMenus">
+      <a class="aM" id="homeIcon" href="/">Home</a>
+      <a class="aM" href="/masssearch">Mass Search</a>
+
+      <a class="aM" id="Reports" href="/reports">Reports</a>
+      <i id="modeColor" class="fa-solid fa-moon"></i>
+
+      <div class="creditBalance">
+        <p class="creditB">30</p>
+
+        <img class="creditI" src="{{ url_for('static', filename='images/credits.png')}}" alt="">
+      </div>
+
+    </div>
+
+    <button id="signupButton">Get Started</button>
+  </div>
+
+
+
+  {% block body %}
+
+
+  {% endblock body %}
+
+
+
+
+{% block script %}
+
+
+{% endblock script %}
+
+  <script type="module" src="{{ url_for('static', filename='js/script.js')}}" type="image/x-icon"></script>
+  <script type="module" src="{{ url_for('static', filename='js/data.js')}}" type="image/x-icon"></script>
+
+</body>
+
+</html>

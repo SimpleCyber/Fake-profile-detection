@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imposter</title>
+
+  <script src="https://kit.fontawesome.com/6cc1a5eb9c.js" crossorigin="anonymous"></script>
+
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}" />
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/appLogo.png')}}" type="image/x-icon" />
+</head>
+
+<body>
+
+  <div id="topBar">
+
+    <div id="appLogo">
+      <img id="appL1" src="{{ url_for('static', filename='images/appLogo.png')}}" alt="">
+      <h1 id="appT">Imposter</h1>
+    </div>
+
+    <div id="otherMenus">
+      <a class="aM" id="homeIcon" href="#">Home</a>
+      <a class="aM" href="#">About us</a>
+
+
+      <div class="dropdown">
+        <button id="a1" class="dropbtn">Detection Tests <i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-content">
+          <a href="#">Profile Completeness Test</a>
+          <a href="#">Activity Anomaly Test</a>
+          <a href="#">Content Analysis Test</a>
+          <a href="#">Image Authenticity Test</a>
+          <a href="#">Social Network Analysis</a>
+          <a href="#">Full Profile Test</a>
+          <a id="impTest" href="#">Bot or Automation Test</a>
+        </div>
+      </div>
+
+      <a class="aM" id="Reports" href="#">Reports</a>
+      <i id="modeColor" class="fa-solid fa-moon"></i>
+
+    </div>
+
+  </div>
+
+<div class="reportd">
+  <div class="container">
+    <input type="text" id="searchBar" placeholder="Search for Accounts" onkeyup="filterTable()">
+    <button class="filter-btn">Filter</button>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>User-id</th>
+          <th>Account Link</th>
+          <th>Status</th>
+          <th>Platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be inserted dynamically here -->
+      </tbody>
+    </table>
+  </div>
+
+ </div>
+
+
+  <script type="module" src="{{ url_for('static', filename='js/reports.js')}}" type="image/x-icon"></script>
+</body>
+
+</html>

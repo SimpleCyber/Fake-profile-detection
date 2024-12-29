@@ -1,0 +1,100 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram User Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .profile-pic {
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Instagram User Search</h1>
+    
+    <form method="POST" class="search-form">
+        <input type="text" name="name" placeholder="Enter name to search" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error_message %}
+    <div class="error">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
+    {% if results %}
+    <table>
+        <thead>
+            <tr>
+                <th>SR. No</th>
+                <th>Profile Picture</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>User ID</th>
+
+                <!-- <th>Bio</th>
+                <th>Followers</th>
+                <th>Following</th>
+                <th>No of Posts</th> -->
+
+                <th>Private</th>
+                <th>Verified</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in results %}
+            <tr>
+                <td>{{ user.index }}</td>
+                <td>
+                    <img src="{{ user.profile_pic_url }}" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+                </td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.id }}</td>
+
+                <!-- <td>{{user.Bio}}</td>
+                <td>{{user.Followers}}</td>
+                <td>{{user.Following}}</td>
+                <td>{{user.NumberOfPosts}}</td> -->
+
+
+                <td>{{ 'Yes' if user.is_private else 'No' }}</td>
+                <td>{{ 'Yes' if user.is_verified else 'No' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

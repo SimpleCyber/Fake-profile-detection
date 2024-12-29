@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cyber.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Imposter</h2>
+      <ul>
+        <li><i class="fas fa-home"></i><a href="#" id="cyber"> Dashboard</a></li>
+        <li><i class="fas fa-flag"></i> <a href="#" id="cyberreport">Reported Accounts</a></li>
+        <li><i class="fas fa-history"></i> <a href="#" id="cyberhistory">History</a></li>
+      </ul>
+    </div>
+    <div class="toggle-button" onclick="toggleSidebar()" style="display:none;">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+      <header class="header">
+        <div class="title"><h3>Welcome Back,</h3><span>This Page Shows Overview Of Your Stats... </span></div>
+        <div class="header-icons">
+          <div class="theme-switch">
+            <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+            <label for="theme-toggle" class="theme-toggle-label">
+              <span class="toggle-circle"></span>
+            </label>
+          </div>
+          <i class="fas fa-bell"></i>
+          <i class="fas fa-cog"></i>
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </header>
+
+
+      <!-- Stats Section -->
+      <section class="stats">
+        <div class="card Rep-Acc">
+          <h2>Reported Accounts <br> <span> (last 24 hours)</span></h2>
+          <p class="highlight">133</p>
+        </div>
+        <div class="card">
+          <h2>Average Fake Account Detected</h2>
+          <p>Last Month: <span>11</span></p>
+          <p>Current Month: <span>8</span></p>
+        </div>
+        <div class="card fake-acc">
+          <h2>Total Fake Accounts Detected</h2>
+          <div class="highlight-circle">65</div>
+        </div>
+        <div class="card status">
+          <h2>Work Status</h2>
+          <p class="para" ><i class="fa-solid fa-face-smile" style="color: #4caf50;"></i>
+            <span class="promoters">67 </span><span id="green" >Resolved </span></p>
+          <p  class="para"><i class="fa-solid fa-face-meh" style="color: #ffc107;"></i>
+            <span class="passives">20 </span> <span  id="yellow"> Under Investigation </span></p>
+          <p  class="para" ><i class="fa-solid fa-face-frown" style="color: #f44336;"></i>
+            <span class="detractors">11 </span> <span id="red">Pending</span> </p>
+        </div>
+      </section>
+
+      <!-- Graph Section -->
+      <section class="graphs">
+        <div class="graph plat-Acc">
+          <h3>Reported Accounts By Platform</h3>
+          <canvas id="csBreakdownChart"></canvas>
+        </div>
+        <div class="graph">
+          <h3>Average Fake Account Detected Over Week</h3>
+          <canvas id="responseTimeChart"></canvas>
+        </div>
+        <div class="graph">
+          <h3>Average Fake Account Detected Over Month</h3>
+          <canvas id="csatChart"></canvas>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="{{ url_for('static', filename='js/cyber.js')}}" type="image/x-icon"></script>
+</body>
+</html>

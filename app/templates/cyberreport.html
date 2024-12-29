@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Investigation Cards</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cyber.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+        <h2>Imposter</h2>
+        <ul>
+            <li><i class="fas fa-home"></i><a href="#" id="cyber"> Dashboard</a></li>
+            <li><i class="fas fa-flag"></i> <a href="#" id="cyberreport">Reported Accounts</a></li>
+            <li><i class="fas fa-history"></i> <a href="#" id="cyberhistory">History</a></li>
+        </ul>
+    </div>
+    <div class="toggle-button" onclick="toggleSidebar()" style="display: none;">
+        <i class="fas fa-bars"></i>
+      </div>
+  <main class="dashboard" id="report-main">
+        <header class="header">
+          <div class="title"><h3><u>Reported Accounts...</u></h3></div>
+          <div class="header-icons">
+            <div class="theme-switch">
+                <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+                <label for="theme-toggle" class="theme-toggle-label">
+                  <span class="toggle-circle"></span>
+                </label>
+              </div>
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-cog"></i>
+            <i class="fas fa-user-circle"></i>
+          </div>
+        </header>
+
+
+        <div id="card-container" class="container-card"></div>
+    </div>
+  </main>
+  </div>
+  <script type="module" src="{{ url_for('static', filename='js/cyberreport.js')}}" type="image/x-icon"></script>
+</body>
+</html>
