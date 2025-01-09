@@ -2,7 +2,6 @@ Flask
 Flask-Cors
 requests
 joblib
-openai
 gunicorn
 scikit-learn
 python-dotenv
