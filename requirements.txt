@@ -6,3 +6,4 @@ openai
 gunicorn
 scikit-learn
 python-dotenv
+openai==0.28
