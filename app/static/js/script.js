@@ -307,8 +307,8 @@ function collectCaptions(username, totalPosts) {
 
     setTimeout(() => {
         totalPosts=10;
-        fraudTest(username, totalPosts);
-        // opentest(username); ----> open ai 1
+        // fraudTest(username, totalPosts);
+         opentest(username); //----> open ai 1
     }, totalPosts * 250 + 500);
 }
 
@@ -337,8 +337,8 @@ async function opentest(username) {
         console.log(fraudResult);
 
         // Optionally display the fraud test result
-        showFraudResult(fraudResult);
-        // displayResult(fraudResult) ----> open ai 2
+        // showFraudResult(fraudResult);
+        displayResult(fraudResult) //----> open ai 2
     } catch (error) {
         console.error('Error in opentest:', error);
     }
@@ -374,9 +374,9 @@ async function fraudTest(username, tw) {
 
         console.log("hiio jiiii : ",fraudResult);
 
-        showFraudResult(fraudResult.result);
+        // showFraudResult(fraudResult.result);
 
-        // displayResult(fraudResult) -----> open ai 3
+        displayResult(fraudResult)// -----> open ai 3
     } catch (error) {
         console.error('Error in fraudTest:', error);
     }

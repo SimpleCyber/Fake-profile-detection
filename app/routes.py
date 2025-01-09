@@ -51,7 +51,7 @@ def cyberhistory():
 
 
 
-max_users = 1
+max_users = 10
 
 
 

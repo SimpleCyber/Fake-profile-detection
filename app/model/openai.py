@@ -4,23 +4,14 @@ import json
 from app import app
 import os
 import requests
-# Set your OpenAI API key
-#  # Replace with your actual API key
-# Input query
-# query = """
-# cute_ishu_jattni
-# 65 posts
-# ITBP officer 🤟🤟
-# ITBP officer 🤟 No love No tanssion 🤟🙏
-# This account is private
-# Follow to see their photos and videos.
-# """
+from dotenv import load_dotenv
+load_dotenv()
 
-MODEL = "4.o"
 
-# ------------------------------------------------------------
-# Providing the system prompt
-# ------------------------------------------------------------
+openai.api_key=os.getenv("OPEN_KEY")
+
+MODEL = "gpt-4"
+
 system_prompt = """
     You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. in why it belongs to that category  tell add words due to which it lies in that category example "kill in hate" , "occupy kashmir in extremist" else put there "-" .You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in this format:
     <div class="final_output">
@@ -109,8 +100,4 @@ def get_post_response_json():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
-    
-
-
-
     

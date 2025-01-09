@@ -28,7 +28,7 @@ def get_user_data(username):
     url = "https://instagram-scraper-api2.p.rapidapi.com/v1/info"
     querystring = {"username_or_id_or_url": username}
     headers = {
-    'x-rapidapi-key': "63e87f7f8bmsh602fffeb8cef799p15e30ejsn889cc10bbe2b",
+    'x-rapidapi-key': "acdfe0df04msh7a4e8b244eca339p1a58c6jsn344dbffe049a",
     'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
     }
     # fetching the data from the api
@@ -94,7 +94,7 @@ def get_recent_posts(username):
     url = "https://instagram-scraper-api2.p.rapidapi.com/v1.2/posts"
     querystring = {"username_or_id_or_url": username}
     headers = {
-        'x-rapidapi-key': "63e87f7f8bmsh602fffeb8cef799p15e30ejsn889cc10bbe2b",
+        'x-rapidapi-key': "acdfe0df04msh7a4e8b244eca339p1a58c6jsn344dbffe049a",
         'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
     }
 

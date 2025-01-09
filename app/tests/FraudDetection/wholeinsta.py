@@ -3,6 +3,9 @@ from flask import Flask, render_template, request
 import requests
 import traceback
 import os
+import certifi
+
+
 
 app = Flask(__name__)
 
@@ -15,16 +18,19 @@ os.makedirs(PROFILE_PIC_DIR, exist_ok=True)
 def download_image(url, filename):
     """Download the image from the given URL and save it locally."""
     try:
-        response = requests.get(url, stream=True)
+        response = requests.get(url, stream=True, verify=certifi.where())
         if response.status_code == 200:
             filepath = os.path.join(PROFILE_PIC_DIR, filename)
             with open(filepath, 'wb') as f:
                 for chunk in response.iter_content(1024):
                     f.write(chunk)
             return filepath
+    except requests.exceptions.SSLError as ssl_error:
+        print(f"SSL error while downloading {url}: {ssl_error}")
     except Exception as e:
         print(f"Error downloading image: {e}")
     return '/static/default_placeholder.jpg'
+
 
 
 
@@ -35,24 +41,29 @@ def wholeinstaFetch():
     try:
         data = request.get_json()
         username = data.get('username')
-        results = index(username)
+        results, error_message = index(username)
+        
+        if error_message:
+            return {"error": error_message}, 400
+        
         return {"results": results}, 200
     except Exception as e:
+        traceback.print_exc()
         return {"error": str(e)}, 500
 
 
-def index():
+
+def index(name):
     results = []
-    error_message = None
 
     if request.method == 'POST':
         name = request.form.get('name')
 
-        print("Name :", name , "🌿🌿🌿🌿🌿🌿🌿🌿")
+        print("Name :", name , "🌿🌿🌋🌋🌋🌋🌋🌿🌿🌿🌿")
         
         # API request headers
         headers = {
-            "x-rapidapi-key": "59212121fcmsh7a3003ba82b66dcp192c86jsnb1a115ce4a7d",
+            "x-rapidapi-key": "acdfe0df04msh7a4e8b244eca339p1a58c6jsn344dbffe049a",
             "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com"
         }
 
@@ -67,9 +78,6 @@ def index():
                 params=querystring
             )
             
-            # Print the raw response for debugging
-            print("Raw Response Status Code:", response.status_code)
-            print("Raw Response Text:", response.text)
 
             # Check if the response is successful
             response.raise_for_status()
@@ -98,6 +106,10 @@ def index():
                         'is_verified': user_info.get('is_verified', False),
                         'profile_pic_url': local_pic_path
                     })
+
+                    print("hii 😌😌😌😌😌 ",results)
+
+
 
                 if not results:
                     error_message = "No valid user data found."
