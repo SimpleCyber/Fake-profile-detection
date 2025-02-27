@@ -12,7 +12,7 @@ Imposter : A system that detects fake social media profiles from maijor social m
 <div align="center">
   <img src='https://bit.ly/3CXZ6AR' alt="Tech Simp Image 1" height="270" width="400" />
   
-  <img src="https://media.licdn.com/dms/image/v2/D4D22AQEew81maLhvMw/feedshare-shrink_2048_1536/B4DZPTTxJuGUAs-/0/1734417088047?e=1738195200&v=beta&t=pR9zSt6EBqZlPSFS0EXqPMzYUDr0AnXQ32qMlLYPm_M" alt="Tech Simp Image 2" height="270" width="400" />
+  <img src="https://bit.ly/3DdoRNt" alt="Tech Simp Image 2" height="270" width="400" />
 </div>
 
 ## Features
