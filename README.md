@@ -3,6 +3,8 @@
 [![Deployed Application](https://img.shields.io/badge/Deployed-Link-brightgreen)](https://imposter-r3q6.onrender.com/)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/SimpleCyber/Fake-profile-detection.git)
 
+Link 2 : https://fake-profile-detection-k1qn.onrender.com/
+
 ## Description
 
 Imposter : A system that detects fake social media profiles from maijor social media platforms.
