@@ -1,42 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anchor Tag Finder</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Social Media Details</title>
+ <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <div class="header">
-    <h4>Fake account detection:</h4>
-    
-    <div class="theme-toggle">
-      <label class="switch">
-        <input type="checkbox" id="theme-toggle">
-        <span class="slider"></span>
-      </label>
-      <span class="theme-label"></span>
+  <h1>Social Media Details</h1>
+  
+  <div class="platform-info" id="current-site">
+    <div style="text-align: center; color: #666;">
+      Checking current site...
     </div>
   </div>
-
-  <div class="output">
-    <div id="results1">
-      <p>No results yet :></p>
-    </div>
-
-    <div id="results"></div>
-  </div>
-
-  <div id="profile-container">
-    
-  </div>
-
-
-  <div class="btn">
-    <button id="find-anchors">Find</button>
-    <button id="find-anchors">Report</button>
-  </div>
+  
+  <button id="fetch-button">Fetch Details</button>
+  
+  <div id="status"></div>
+  <div id="results"></div>
 
   <script src="popup.js"></script>
 </body>
