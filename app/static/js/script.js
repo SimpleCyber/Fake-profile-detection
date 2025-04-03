@@ -6,7 +6,7 @@ let noOfPosts;
 
 
 function changeTheme() {
-    if (localStorage.getItem("ModeColor") == "dark") {
+    if (localStorage.getItem("ModeColor") == "light") {
         document.documentElement.style.setProperty('--light', "#2f3046")
         document.documentElement.style.setProperty('--dark', "#14152a")
         document.documentElement.style.setProperty('--material', "#1ABC9C")
