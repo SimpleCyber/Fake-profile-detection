@@ -1,4 +1,5 @@
-# Imposter: Fake Social Media Profile Detection
+# Imposter: Scaling Trust: AI-Powered Detection of Online Harms
+
 
 [![Deployed Application](https://img.shields.io/badge/Deployed-Link-brightgreen)](https://imposter-r3q6.onrender.com/)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/SimpleCyber/Fake-profile-detection.git)
