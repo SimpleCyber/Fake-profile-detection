@@ -9,14 +9,6 @@ Link 2 : https://fake-profile-detection-k1qn.onrender.com/
 
 Imposter : A system that detects fake social media profiles from maijor social media platforms.
 
-**Participated in SIH 2024: Won First Prize!**
-
-<div align="center">
-  <img src='https://bit.ly/3CXZ6AR' alt="Tech Simp Image 1" height="270" width="400" />
-  
-  <img src="https://bit.ly/3DdoRNt" alt="Tech Simp Image 2" height="270" width="400" />
-</div>
-
 ## Features
 
 - **Cross-Platform Data Fetching:** Analyze profiles from multiple platforms.
