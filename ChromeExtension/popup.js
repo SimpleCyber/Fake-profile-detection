@@ -27,9 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         currentSiteElement.innerHTML = `
           <div style="text-align: center; color: #666;">
-            Not on a supported social media platform.<br>
-            Please visit a profile on Instagram, Facebook, Twitter/X, or LinkedIn.
-          </div>
+          Please visit a user on Instagram, Facebook, Twitter/X, or LinkedIn, for this extension to work.
+          <br>
+          <br>
+          For detailed results, visit our website 
+              <a href="https://imposter-r3q6.onrender.com" target="_blank" style="color: #007bff;">Imposter</a>
+
+        </div>
         `;
         fetchButton.disabled = true;
       }
