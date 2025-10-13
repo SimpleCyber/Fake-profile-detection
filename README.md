@@ -1,5 +1,11 @@
 # Imposter: Scaling Trust: AI-Powered Detection of Online Harms
 
+<br>
+
+<img width="1919" height="923" alt="image" src="https://github.com/user-attachments/assets/d848764a-ee40-4369-9db2-5bc4ad26eff0" />
+<br>
+<br>
+
 
 [![Deployed Application](https://img.shields.io/badge/Deployed-Link-brightgreen)](https://imposter-r3q6.onrender.com/)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/SimpleCyber/Fake-profile-detection.git)
@@ -40,4 +46,5 @@ Imposter : A system that detects fake social media profiles from maijor social m
 ## Contributors
 
 Developed by **Tech Simp**. Reach out for queries or collaborations!
+
 
