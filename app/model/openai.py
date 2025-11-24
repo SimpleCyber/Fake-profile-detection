@@ -1,19 +1,20 @@
-from flask import Flask, render_template, request ,jsonify
-import openai
+from flask import Flask, render_template, request, jsonify
+import google.generativeai as genai
 import json
 from app import app
 import os
 import requests
 from dotenv import load_dotenv
+
 load_dotenv()
 
+# Configure Gemini API key
+genai.configure(api_key=os.getenv("GEMINI_KEY"))
 
-openai.api_key=os.getenv("OPEN_KEY")
+MODEL = "gemini-2.5-flash-lite"
 
-MODEL = "gpt-4"
-
-system_prompt = """
-    You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. in why it belongs to that category  tell add words due to which it lies in that category example "kill in hate" , "occupy kashmir in extremist" else put there "-" .You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in this format:
+system_prompt = """ 
+        You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. in why it belongs to that category  tell add words due to which it lies in that category example "kill in hate" , "occupy kashmir in extremist" else put there "-" .You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in this format:
     <div class="final_output">
         <h3> Fake post detection:<h3>
         <table>
@@ -60,30 +61,26 @@ system_prompt = """
             </div>
 """
 
-# Function to get the response
 @app.route('/openai', methods=['POST'])
 def get_post_response_json():
     print("Model testing started 🌿")
     try:
-        # Retrieve JSON data from the request
         query = request.get_json()
         user_info = query.get('userinformation', {})
         username = user_info["ProfileInfo"]["Username"]
-        print("username from open api:",username)
+        print("username from gemini:", username)
 
-        # Make OpenAI API call
-        response = openai.ChatCompletion.create(
-            model=MODEL,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": str(user_info)}
-            ]
-        )
-        
-        # Extract response content
-        response_content = response["choices"][0]["message"]["content"]
+        # --- FIX: Combine system + user into one input ---
+        final_prompt = system_prompt + "\n\nUser Profile Information:\n" + str(user_info)
+
+        # Gemini API call (correct usage)
+        model = genai.GenerativeModel(MODEL)
+        response = model.generate_content(final_prompt)
+
+        response_content = response.text
         print("Response:", response_content)
-        
+
+        # Saving data
         base_dir = os.path.join(os.getcwd(), username)
         os.makedirs(base_dir, exist_ok=True)
 
@@ -94,10 +91,8 @@ def get_post_response_json():
         with open(output_path, "w") as profile_info_file:
             json.dump(response_content, profile_info_file, indent=4)
 
-
         return jsonify({"result": response_content})
-    
+
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
-    
