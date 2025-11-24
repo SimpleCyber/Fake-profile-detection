@@ -1,254 +1,397 @@
-let username;
-let impersonation;
-let hate;
-let spam;
-let extremist;
-let risk;
-let reason;
-let conclusion;
+document.addEventListener('DOMContentLoaded', function() {
+    const currentSiteElement = document.getElementById('current-site');
+    const fetchButton = document.getElementById('fetch-button');
+    const statusElement = document.getElementById('status');
+    const resultsElement = document.getElementById('results');
+    
+    // Get current tab URL
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      const currentUrl = tabs[0].url;
+      
+      // Detect platform and extract username from URL
+      const platformInfo = detectPlatformAndUsername(currentUrl);
+      
+      if (platformInfo) {
+        currentSiteElement.innerHTML = `
+          <div><span class="info-label">Platform:</span> <span class="username">${platformInfo.platform}</span></div>
+          <div><span class="info-label">Username:</span> <span class="username">${platformInfo.username}</span></div>
+        `;
+        
+        // Enable button
+        fetchButton.disabled = false;
+        
+        // Add click event
+        fetchButton.addEventListener('click', function() {
+          fetchUserDetails(platformInfo.platform, platformInfo.username);
+        });
+      } else {
+        currentSiteElement.innerHTML = `
+          <div style="text-align: center; color: #666;">
+          Please visit a user on Instagram, Facebook, Twitter/X, or LinkedIn, for this extension to work.
+          <br>
+          <br>
+          For detailed results, visit our website 
+              <a href="https://imposter-r3q6.onrender.com" target="_blank" style="color: #007bff;">Imposter</a>
 
-document.getElementById("find-anchors").addEventListener("click", () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const activeTab = tabs[0].id;
-
-    chrome.scripting.executeScript(
-      {
-        target: { tabId: activeTab },
-        files: ["content.js"],
-      },
-      async (results) => {
-        const anchors = results[0].result || [];
-        const resultsDiv1 = document.getElementById("results1");
-        const resultsDiv = document.getElementById("results");
-
-        if (anchors.length > 0) {
-          const firstAnchor = anchors[0];
-          username = firstAnchor.href.slice(1, -1); // Extract the username
-
-          resultsDiv1.innerHTML = `
-            <div>
-              <strong>Instagram:</strong>
-              <pre>${firstAnchor.html}</pre>
-              <p><strong>Href:</strong> ${username}</p>
-            </div>
-          `;
-
-          console.log("Fetching info for username:", username);
-
-          try {
-            // Call your Flask API
-            const response = await fetch(
-              "https://fetch-insta.vercel.app/instagram",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username: username }),
-              }
-            );
-
-            if (!response.ok) {
-              throw new Error(
-                "Failed to fetch user info. Please check the username."
-              );
-            }
-
-            // Store user data
-            const data = await response.json();
-            const profileInfo = data.result.ProfileInfo;
-            const captions = data.result.Captions;
-            const captionsString = Array.isArray(captions)
-              ? captions.map(caption => JSON.stringify(caption)).join(" ")
-              : JSON.stringify(captions); 
-
-            const commandInput = JSON.stringify(profileInfo) + " " + captionsString;
-
-            resultsDiv.innerHTML = "";
-
-            let details = [
-              `<p><strong>Name:</strong> ${profileInfo.Name || "N/A"}</p>`,
-              `<p><strong>Bio:</strong> ${profileInfo.Bio || "N/A"}</p>`,
-              `<p><strong>Verified:</strong> ${profileInfo.Verified || "N/A"}</p>`,
-              `<p><strong>Privacy:</strong> ${profileInfo.AccountPrivacy || "N/A"}</p>`,
-              `<p><strong>Number of Posts:</strong> ${profileInfo.NumberOfPosts || "N/A"}</p>`,
-              `<p><strong>Followers:</strong> ${profileInfo.Followers || "N/A"}</p>`,
-              `<p><strong>Following:</strong> ${profileInfo.Following || "N/A"}</p>`,
-            ];
-
-            details.forEach((detail, index) => {
-              setTimeout(() => {
-                resultsDiv.innerHTML += detail;
-              }, index * 500); 
-            });
-
-            console.log("commandInput : ", commandInput);
-
-            // Await the result from the OpenAI API call
-            const fraudResultResponse = await getResultFromCommand(commandInput);
-            console.log("fraudResultResponse : ", fraudResultResponse);
-
-            if (fraudResultResponse && fraudResultResponse.result) {
-              const fraudResult = fraudResultResponse.result;
-
-              // Parse HTML content of the fraud result and extract details
-              const doc = new DOMParser().parseFromString(fraudResult, "text/html");
-
-              impersonation = doc.querySelector(".Impersonate")?.textContent || "N/A";
-              hate = doc.querySelector(".hate")?.textContent || "N/A";
-              spam = doc.querySelector(".Spam")?.textContent || "N/A";
-              extremist = doc.querySelector(".Extremist")?.textContent || "N/A";
-              risk = doc.querySelector(".risk")?.textContent || "N/A";
-
-              const reasonElement = Array.from(doc.querySelectorAll("strong")).find((el) => el.textContent.includes("Reason:"));
-              reason = reasonElement?.nextElementSibling?.textContent.trim() || "N/A";
-
-              const conclusionElement = Array.from(doc.querySelectorAll("strong")).find((el) => el.textContent.includes("Conclusion:"));
-              conclusion = conclusionElement?.nextElementSibling?.textContent.trim() || "N/A";
-
-              // Display the fraud detection result
-              const profileContainer = document.getElementById("profile-container");
-              profileContainer.innerHTML = `
-                <p><strong>Impersonation:</strong> ${impersonation}</p>
-                <p><strong>Hate:</strong> ${hate}</p>
-                <p><strong>Spam:</strong> ${spam}</p>
-                <p><strong>Extremist:</strong> ${extremist}</p>
-                <p><strong>Risk:</strong> ${risk}</p>
-                <p><strong>Reason:</strong> ${reason}</p>
-                <p><strong>Conclusion:</strong> ${conclusion}</p>
-              `;
-            }
-          } catch (error) {
-            console.error("Error fetching user data:", error);
-          }
-        } else {
-          resultsDiv1.innerHTML = "<p>No matching anchor tags found.</p>";
-          console.log("No anchors found.");
+        </div>
+        `;
+        fetchButton.disabled = true;
+      }
+    });
+    
+    function detectPlatformAndUsername(url) {
+      const urlPatterns = {
+        instagram: {
+          pattern: /https?:\/\/(www\.)?instagram\.com\/([^/?]+)/i,
+          platform: 'instagram'
+        },
+        facebook: {
+          pattern: /https?:\/\/(www\.)?facebook\.com\/([^/?]+)/i,
+          platform: 'facebook'
+        },
+        twitter: {
+          pattern: /https?:\/\/(www\.)?twitter\.com\/([^/?]+)/i,
+          platform: 'twitter'
+        },
+        x: {
+          pattern: /https?:\/\/(www\.)?x\.com\/([^/?]+)/i,
+          platform: 'x'
+        },
+        linkedin: {
+          pattern: /https?:\/\/(www\.)?linkedin\.com\/in\/([^/?]+)/i,
+          platform: 'linkedin'
+        }
+      };
+      
+      for (const key in urlPatterns) {
+        const match = url.match(urlPatterns[key].pattern);
+        if (match && match[2]) {
+          return {
+            platform: urlPatterns[key].platform,
+            username: match[2]
+          };
         }
       }
-    );
-  });
-});
-
-async function getResultFromCommand(userCommand) {
-  userCommand ="i am satyam"
-  try {
-    // Make API request to OpenAI
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userCommand },
-        ],
-      }),
-    });
-
-    // Check if the request was successful
-    if (!response.ok) {
-      const errorDetails = await response.text();
-      throw new Error(`OpenAI API error: ${response.statusText} - ${errorDetails}`);
+      
+      return null;
     }
-
-    // Parse and return the response content
-    const data = await response.json();
-    return data.choices[0].message.content;
-
-  } catch (error) {
-    console.error("Error fetching OpenAI response:", error);
-    // You can return a user-friendly message or the raw error
-    return `Error: ${error.message}`;
-  }
-}
-
-
-
-
-
-// Ensure you have your OpenAI API key
-const OPENAI_API_KEY = "";  // Replace with your OpenAI API key
-const MODEL = "gpt-4";
-
-// System prompt definition
-const systemPrompt1 = `
-    You are an AI model that detects the given profile as fake or not based on the number of followers, following, bio, verified or not, username trying to impersonate some famous user names, from the post's caption events in real-time or in the past if the data, number of posts etc. You will be provided with the input of users' social media profile information and posts, and your goal is to respond with a structured solution in this format:
-    <div class="final_output">
-        <h3> Fake post detection:</h3>
-        <table>
-            <tr>
-                <td>Fake or propaganda information</td>
-                <td><span class="propaganda">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Extremist</td>
-                <td><span class="Extremist">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Spam message</td>
-                <td><span class="Spam">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Violent or hate speech or toxic</td>
-                <td><span class="hate">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Impersonate account</td>
-                <td><span class="Impersonate">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Incomplete profile</td>
-                <td><span class="Incomplete">(percentage out of 100)</span></td>
-            </tr>
-        </table>
-        <li>Percentage of risk: <span class="risk">(percentage out of 100)</span></li>
-        <strong>Reason:</strong>
-            If the profile belongs to any of these 6 categories then why just in 10-20 words.
-        <strong>Conclusion: </strong>
-            Just one precise summary point.
-    </div>
-`;
-
-const systemPrompt = `hii gpt , how are u`
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  const themeToggle = document.getElementById("theme-toggle");
-  const themeLabel = document.querySelector(".theme-label");
-
-  // Check for saved theme preference or default to light mode
-  const currentTheme = localStorage.getItem("theme") || "light";
-
-  // Set initial theme
-  if (currentTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    themeToggle.checked = true;
-    themeLabel.textContent = "";
-  }
-
-  // Toggle theme on switch change
-  themeToggle.addEventListener("change", function () {
-    if (this.checked) {
-      document.body.classList.add("dark-mode");
-      localStorage.setItem("theme", "dark");
-      themeLabel.textContent = "";
-    } else {
-      document.body.classList.remove("dark-mode");
-      localStorage.setItem("theme", "light");
-      themeLabel.textContent = "";
+    
+    function fetchUserDetails(platform, username) {
+      // Show loading and disable button
+      statusElement.innerHTML = `
+        <div style="display: flex; align-items: center;">
+          <div style="border: 3px solid #f3f3f3; border-top: 3px solid #0095f6; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; animation: spin 1s linear infinite;"></div>
+          Loading data... This may take a moment.
+        </div>
+        <style>
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        </style>
+      `;
+      statusElement.style.display = 'block';
+      fetchButton.disabled = true;
+      fetchButton.textContent = 'Fetching...';
+      resultsElement.innerHTML = '';
+      
+      // Use the background script to fetch data
+      chrome.runtime.sendMessage(
+        { 
+          action: 'fetchUserDetails', 
+          platform, 
+          username 
+        },
+        function(response) {
+          // Re-enable button
+          fetchButton.disabled = false;
+          fetchButton.textContent = 'Fetch Details';
+          
+          // Hide loading
+          statusElement.style.display = 'none';
+          
+          if (response && response.success) {
+            const data = response.data;
+            
+            // Display results
+            if (data && data.data) {
+              displayNestedData(data.data);
+            } else {
+              resultsElement.innerHTML = '<div style="color: #666; padding: 10px;">No data found for this user.</div>';
+            }
+          } else {
+            // Handle errors
+            statusElement.innerHTML = `
+              <div style="color: #d9534f; padding: 10px;">
+                Error: ${response ? response.error : 'Failed to fetch data'}. Please try again.
+              </div>
+            `;
+          }
+        }
+      );
+      
+      // Set timeout to handle no response from background script
+      setTimeout(() => {
+        if (fetchButton.disabled) {
+          fetchButton.disabled = false;
+          fetchButton.textContent = 'Retry Fetch';
+          statusElement.innerHTML = `
+            <div style="color: #d9534f; padding: 10px;">
+              Request timed out. The server might be busy or temporarily down. Please try again later.
+            </div>
+          `;
+        }
+      }, 30000);
+    }
+    
+    function displayNestedData(data) {
+      resultsElement.innerHTML = '';
+      
+      // Handle ProfileInfo section
+      if (data.ProfileInfo) {
+        const profileSection = document.createElement('div');
+        profileSection.className = 'data-section';
+        
+        const profileTitle = document.createElement('h3');
+        profileTitle.textContent = 'Profile Information';
+        profileTitle.className = 'section-title';
+        profileSection.appendChild(profileTitle);
+        
+        const profileTable = document.createElement('table');
+        
+        for (const [key, value] of Object.entries(data.ProfileInfo)) {
+          // Skip image paths that are server file paths
+          if (key === 'profile_image_path' && value.startsWith('/opt/')) continue;
+          
+          const row = profileTable.insertRow();
+          
+          const keyCell = row.insertCell();
+          keyCell.textContent = formatKey(key);
+          keyCell.className = 'key-cell';
+          
+          const valueCell = row.insertCell();
+          
+          // Handle special cases like URLs
+          if (typeof value === 'string' && (value.startsWith('http://') || value.startsWith('https://'))) {
+            if (key.toLowerCase().includes('image') || key.toLowerCase().includes('banner')) {
+              // It's an image URL
+              const img = document.createElement('img');
+              img.src = value;
+              img.alt = key;
+              img.style.maxWidth = '100%';
+              img.style.maxHeight = '150px';
+              img.style.borderRadius = '4px';
+              valueCell.appendChild(img);
+            } else {
+              // It's a regular URL
+              const link = document.createElement('a');
+              link.href = value;
+              link.textContent = value;
+              link.target = '_blank';
+              valueCell.appendChild(link);
+            }
+          } else {
+            // Regular value
+            valueCell.textContent = value === null ? 'Not available' : value.toString();
+          }
+        }
+        
+        profileSection.appendChild(profileTable);
+        resultsElement.appendChild(profileSection);
+      }
+      
+      // Handle captions section if available
+      if (data.captions && data.captions.length > 0) {
+        const captionsSection = document.createElement('div');
+        captionsSection.className = 'data-section';
+        
+        const captionsTitle = document.createElement('h3');
+        captionsTitle.textContent = 'Recent Captions';
+        captionsTitle.className = 'section-title';
+        captionsSection.appendChild(captionsTitle);
+        
+        const captionsList = document.createElement('ul');
+        captionsList.className = 'captions-list';
+        
+        // Only show up to 3 captions to save space
+        const maxCaptions = Math.min(3, data.captions.length);
+        
+        for (let i = 0; i < maxCaptions; i++) {
+          const caption = data.captions[i];
+          if (caption.Caption && caption.Caption !== "No text available") {
+            const item = document.createElement('li');
+            item.textContent = caption.Caption;
+            captionsList.appendChild(item);
+          }
+        }
+        
+        if (captionsList.children.length > 0) {
+          captionsSection.appendChild(captionsList);
+          resultsElement.appendChild(captionsSection);
+        }
+      }
+      
+      // Handle tweets section if available
+      if (data.tweets && data.tweets.length > 0) {
+        const tweetsSection = document.createElement('div');
+        tweetsSection.className = 'data-section';
+        
+        const tweetsTitle = document.createElement('h3');
+        tweetsTitle.textContent = 'Recent Tweets';
+        tweetsTitle.className = 'section-title';
+        tweetsSection.appendChild(tweetsTitle);
+        
+        // Only show up to 3 tweets to save space
+        const maxTweets = Math.min(3, data.tweets.length);
+        
+        for (let i = 0; i < maxTweets; i++) {
+          const tweet = data.tweets[i];
+          if (tweet.text && tweet.text !== "No text available") {
+            const tweetDiv = document.createElement('div');
+            tweetDiv.className = 'tweet-item';
+            
+            // Tweet text
+            const tweetText = document.createElement('p');
+            tweetText.textContent = tweet.text;
+            tweetDiv.appendChild(tweetText);
+            
+            // Tweet date
+            if (tweet.created_at) {
+              const tweetDate = document.createElement('div');
+              tweetDate.className = 'tweet-date';
+              tweetDate.textContent = formatDate(tweet.created_at);
+              tweetDiv.appendChild(tweetDate);
+            }
+            
+            // Tweet media (if any)
+            if (tweet.media && tweet.media.length > 0) {
+              const firstMedia = tweet.media[0];
+              if (firstMedia.startsWith('http')) {
+                const mediaThumb = document.createElement('img');
+                mediaThumb.src = firstMedia;
+                mediaThumb.className = 'tweet-media';
+                mediaThumb.alt = 'Tweet media';
+                mediaThumb.style.maxWidth = '100%';
+                mediaThumb.style.maxHeight = '120px';
+                mediaThumb.style.borderRadius = '4px';
+                mediaThumb.style.marginTop = '8px';
+                tweetDiv.appendChild(mediaThumb);
+              }
+            }
+            
+            tweetsSection.appendChild(tweetDiv);
+          }
+        }
+        
+        if (tweetsSection.childElementCount > 1) {  // > 1 because we already added the title
+          resultsElement.appendChild(tweetsSection);
+        }
+      }
+      
+      // Add styles to the results
+      addStylesToResults();
+    }
+    
+    function formatKey(key) {
+      // Convert camelCase to Title Case with spaces
+      return key
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, str => str.toUpperCase());
+    }
+    
+    function formatDate(dateStr) {
+      if (!dateStr) return 'Unknown date';
+      
+      try {
+        // Example: "Mon Mar 03 15:55:15 +0000 2025"
+        const date = new Date(dateStr);
+        return date.toLocaleDateString(undefined, { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric' 
+        });
+      } catch (e) {
+        return dateStr; // Fallback to the original string
+      }
+    }
+    
+    function addStylesToResults() {
+      const style = document.createElement('style');
+      style.textContent = `
+        .data-section {
+          margin-bottom: 20px;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          overflow: hidden;
+        }
+        
+        .section-title {
+          margin: 0;
+          padding: 12px 15px;
+          background-color: #f8f9fa;
+          border-bottom: 1px solid #e9ecef;
+          font-size: 16px;
+          color: #333;
+        }
+        
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        
+        .key-cell {
+          font-weight: bold;
+          color: #555;
+          width: 40%;
+          padding: 8px 15px;
+          border-bottom: 1px solid #e9ecef;
+          vertical-align: top;
+        }
+        
+        td {
+          padding: 8px 15px;
+          border-bottom: 1px solid #e9ecef;
+        }
+        
+        tr:last-child td {
+          border-bottom: none;
+        }
+        
+        .captions-list {
+          list-style-type: none;
+          padding: 0 15px;
+          margin: 10px 0;
+        }
+        
+        .captions-list li {
+          padding: 8px 0;
+          border-bottom: 1px solid #e9ecef;
+        }
+        
+        .captions-list li:last-child {
+          border-bottom: none;
+        }
+        
+        .tweet-item {
+          padding: 12px 15px;
+          border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tweet-item:last-child {
+          border-bottom: none;
+        }
+        
+        .tweet-item p {
+          margin: 0 0 8px 0;
+          line-height: 1.4;
+        }
+        
+        .tweet-date {
+          font-size: 12px;
+          color: #6c757d;
+        }
+      `;
+      resultsElement.appendChild(style);
     }
   });
-
-  // Existing find-anchors functionality (if you had any)
-  const findAnchorsButton = document.getElementById("find-anchors");
-  if (findAnchorsButton) {
-    findAnchorsButton.addEventListener("click", function () {
-      // Your existing find anchors logic here
-    });
-  }
-});

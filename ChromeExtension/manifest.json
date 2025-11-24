@@ -1,13 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Anchor Tag Finder",
-  "version": "2.0",
-  "description": "Imposter : Hello",
-  "permissions": ["scripting", "activeTab" , "storage"],
-  "action": {
-    "default_popup": "popup.html"
-  },
+  "name": "Fake profile detection",
+  "version": "1.0",
+  "description": "Fetch and verify user details from social media platforms",
+  "permissions": ["activeTab", "tabs"],
+  "host_permissions": [
+    "https://socialmediadeatils.onrender.com/*",
+    "https://fake-profile-detect-api.onrender.com/*",
+    "https://imposter-r3q6.onrender.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/image1.png",
+      "48": "assets/image1.png",
+      "128": "assets/image1.png"
+    }
   }
 }

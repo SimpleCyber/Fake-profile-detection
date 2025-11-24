@@ -1,19 +1,20 @@
-# Imposter: Fake Social Media Profile Detection
+# Imposter: Scaling Trust: AI-Powered Detection of Online Harms
+
+<br>
+
+<img width="1919" height="923" alt="image" src="https://github.com/user-attachments/assets/d848764a-ee40-4369-9db2-5bc4ad26eff0" />
+<br>
+<br>
+
 
 [![Deployed Application](https://img.shields.io/badge/Deployed-Link-brightgreen)](https://imposter-r3q6.onrender.com/)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/SimpleCyber/Fake-profile-detection.git)
 
+Link 2 : https://fake-profile-detection-k1qn.onrender.com/
+
 ## Description
 
 Imposter : A system that detects fake social media profiles from maijor social media platforms.
-
-**Participated in SIH 2024: Won First Prize!**
-
-<div align="center">
-  <img src="https://media.licdn.com/dms/image/v2/D4D22AQHVO2sKSrz_6A/feedshare-shrink_2048_1536/B4DZPTTxGrGoAo-/0/1734417108066?e=1738195200&v=beta&t=kvn__lr6EPa3Ct5TkVwfJdD8fM2GqHMr2I7lJx1Z6q4" alt="Tech Simp Image 1" height="270" width="400" />
-  
-  <img src="https://media.licdn.com/dms/image/v2/D4D22AQEew81maLhvMw/feedshare-shrink_2048_1536/B4DZPTTxJuGUAs-/0/1734417088047?e=1738195200&v=beta&t=pR9zSt6EBqZlPSFS0EXqPMzYUDr0AnXQ32qMlLYPm_M" alt="Tech Simp Image 2" height="270" width="400" />
-</div>
 
 ## Features
 
@@ -36,7 +37,7 @@ Imposter : A system that detects fake social media profiles from maijor social m
 ## Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Flask
+- **Backend:** Django
 - **Database:** Firebase
 - **Machine Learning:** Scikit-learn
 
@@ -45,4 +46,5 @@ Imposter : A system that detects fake social media profiles from maijor social m
 ## Contributors
 
 Developed by **Tech Simp**. Reach out for queries or collaborations!
+
 

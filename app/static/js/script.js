@@ -7,20 +7,7 @@ let noOfPosts;
 
 function changeTheme() {
     if (localStorage.getItem("ModeColor") == "dark") {
-        document.documentElement.style.setProperty('--light', "#2f3046")
-        document.documentElement.style.setProperty('--dark', "#14152a")
-        document.documentElement.style.setProperty('--material', "#1ABC9C")
-        document.documentElement.style.setProperty('--text', "#ffffff")
-        document.documentElement.style.setProperty('--darkText', "#ffffff")
-        document.documentElement.style.setProperty('--primary-bg1', "#14152a")
-        document.documentElement.style.setProperty('--select', "#2f3046")
-        document.documentElement.style.setProperty('--Icon-bg', "#1ABC9C")
 
-        document.getElementById("modeColor").className = "fa-solid fa-sun";
-
-        document.getElementById('progressData').style.backgroundColor = '#14152a'
-    }
-    else {
         document.documentElement.style.setProperty('--light', "#F8F9FA")
         document.documentElement.style.setProperty('--dark', "#2C3E50")
         document.documentElement.style.setProperty('--material', "#1ABC9C")
@@ -34,6 +21,24 @@ function changeTheme() {
         document.getElementById("modeColor").className = "fa-solid fa-moon";
 
         document.getElementById('progressData').style.backgroundColor = '#0F1035'
+
+
+
+        
+    }
+    else {
+        document.documentElement.style.setProperty('--light', "#2f3046")
+        document.documentElement.style.setProperty('--dark', "#14152a")
+        document.documentElement.style.setProperty('--material', "#1ABC9C")
+        document.documentElement.style.setProperty('--text', "#ffffff")
+        document.documentElement.style.setProperty('--darkText', "#ffffff")
+        document.documentElement.style.setProperty('--primary-bg1', "#14152a")
+        document.documentElement.style.setProperty('--select', "#2f3046")
+        document.documentElement.style.setProperty('--Icon-bg', "#1ABC9C")
+
+        document.getElementById("modeColor").className = "fa-solid fa-sun";
+
+        document.getElementById('progressData').style.backgroundColor = '#14152a'
     }
 
 }
